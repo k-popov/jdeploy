@@ -1,0 +1,49 @@
+#! /bin/bash
+
+### BEGIN INIT INFO
+# Provides:          <%=@node[:jdeploy][:app][:app_name]%>
+# Required-Start:    $network
+# Required-Stop:     $network
+# Should-Start:
+# Should-Stop:
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: <%=@node[:jdeploy][:app][:app_name]%>
+# Description:       <%=@node[:jdeploy][:app][:app_name]%>
+### END INIT INFO
+
+
+JAVA_HOME="<%=@node[:jdeploy][:java_home]%>"
+PATH=$JAVA_HOME/bin:$PATH
+
+APP_HOME="<%=@node[:jdeploy][:app][:home_dir]%>"
+LOG_FILE="<%=@node[:jdeploy][:app][:stdout_log]%>"
+PID_FILE="<%=@node[:jdeploy][:app][:pid_file]%>"
+
+function dostart {
+	echo "Starting <%=@node[:jdeploy][:app][:app_name]%>."
+	nohup $JAVA_HOME/bin/java <%=@node[:jdeploy][:app][:start_cmdline]%> > $LOG_FILE 2>&1 &
+        echo "$!" > $PID_FILE
+}
+
+function dostop {
+	echo "Stopping <%=@node[:jdeploy][:app][:app_name]%>."
+	if [ -f $PID_FILE ]; then
+		kill `cat $PID_FILE` && rm $PID_FILE
+	fi
+}
+
+case $1 in
+    start)
+        dostart
+        exit 0
+    ;;
+    stop)
+        dostop
+        exit 0
+    ;;
+    *)
+    echo "Usage $0 {start|stop}."
+    exit 1
+    ;;
+esac
