@@ -1,3 +1,9 @@
+
+if ( ! node[:languages][:java] ) || ( ! node[:languages][:java][:version] ) || \
+   v1_older_v2( node[:languages][:java][:version], node[:jdeploy][:min_java_version] )
+        include_recipe "java"
+end
+
 # cleanup the directory if re-deploy requested
 if node[:jdeploy][:redeploy] && File.exists?("#{node[:jdeploy][:app][:home_dir]}")
     directory "#{node[:jdeploy][:app][:home_dir]}" do

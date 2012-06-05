@@ -1,6 +1,7 @@
 # Set this to true to redeploy the app (remove its directory first)
 default[:jdeploy][:redeploy] = true
 default[:jdeploy][:tmp_dir] = "/tmp"
+default[:jdeploy][:min_java_version] = "1.6.0_31"
 
 default[:jdeploy][:app][:home_dir] = "/opt/application"
 default[:jdeploy][:app][:user] = "root"

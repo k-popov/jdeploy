@@ -1,5 +1,6 @@
 class Chef
     class Recipe
+        # guess archive type by its URL
         def archiveTypeByUrl(url = "")
             if url.empty?
                 return ""
@@ -13,6 +14,7 @@ class Chef
             end
         end
 
+        # generate the file name by its URL
         def filenameByUrl(url = "")
             filename = url.split('/')[-1]
             if ! filename
