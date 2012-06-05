@@ -30,6 +30,10 @@ remote_file "#{app_tmp_dir}/#{application_archive_file}" do
     action :create
 end
 
+run_hook "pre_unpack" do
+    script_url node[:jdeploy][:app][:pre_unpack]
+end
+
 # if archive type is not overriden try to detect it
 if node[:jdeploy][:app][:archive_type].empty?
 	 archive_type = archiveTypeByUrl("#{node[:jdeploy][:app][:download_url]}")
@@ -57,6 +61,10 @@ else
     Chef::Application.fatal!("Unable to detect archive type: #{node[:jdeploy][:app][:download_url]}; Set node[:jdeploy][:app][:archive_type] to override.")
 end
 
+run_hook "post_unpack" do
+    script_url node[:jdeploy][:app][:post_unpack]
+end
+
 # create additional required directories if any
 if ! node[:jdeploy][:app][:dirs_to_create].empty?
     node[:jdeploy][:app][:dirs_to_create].each do |additional_dir|
@@ -70,4 +78,6 @@ if ! node[:jdeploy][:app][:dirs_to_create].empty?
     end
 end
 
-
+run_hook "pre_start" do
+    script_url node[:jdeploy][:app][:pre_start]
+end

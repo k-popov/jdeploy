@@ -8,3 +8,9 @@ default[:jdeploy][:app][:group] = "root"
 default[:jdeploy][:app][:download_url] = "http://localhost:7777/app.tar.gz"
 # default[:jdeploy][:app][:archive_type] = "" # set to override ArchiveTypeByUrl detection
 default[:jdeploy][:app][:dirs_to_create] = [] # create additional directories for the app (i.e. logs, pids)
+
+# specify URLs to hook scripts. Leave empty if unnecessary
+default[:jdeploy][:app][:pre_unpack] = ""
+default[:jdeploy][:app][:post_unpack] = ""
+default[:jdeploy][:app][:pre_start] = ""
+
