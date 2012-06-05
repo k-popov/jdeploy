@@ -21,7 +21,9 @@ directory "#{node[:jdeploy][:app][:home_dir]}" do
 end
 
 application_archive_file = filenameByUrl("#{node[:jdeploy][:app][:download_url]}")
-remote_file "#{node[:jdeploy][:tmp_dir]}/#{application_archive_file}" do
+require 'tmpdir'
+app_tmp_dir = Dir.mktmpdir
+remote_file "#{app_tmp_dir}/#{application_archive_file}" do
     source "#{node[:jdeploy][:app][:download_url]}"
     mode "0644"
     backup false
@@ -36,7 +38,7 @@ end
 if archive_type == "zip"
     # unzip the file
     execute "unzip_file" do
-        command "unzip #{node[:jdeploy][:tmp_dir]}/#{application_archive_file}"
+        command "unzip #{app_tmp_dir}/#{application_archive_file}"
         cwd "#{node[:jdeploy][:app][:home_dir]}"
         user "#{default[:jdeploy][:app][:user]}"
         group "#{default[:jdeploy][:app][:group]}"
@@ -45,7 +47,7 @@ if archive_type == "zip"
 elif archive_type == "tar.gz"
     # untar the file
     execute "untar_file" do
-        command "tar -xvzf #{node[:jdeploy][:tmp_dir]}/#{application_archive_file}"
+        command "tar -xvzf #{app_tmp_dir}/#{application_archive_file}"
         cwd "#{node[:jdeploy][:app][:home_dir]}"
         user "#{default[:jdeploy][:app][:user]}"
         group "#{default[:jdeploy][:app][:group]}"
@@ -67,3 +69,5 @@ if ! node[:jdeploy][:app][:dirs_to_create].empty?
         end
     end
 end
+
+
