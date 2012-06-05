@@ -1,14 +1,22 @@
 # Set this to true to redeploy the app (remove its directory first)
 default[:jdeploy][:redeploy] = true
+# JAVA_HOME in for example init script
 default[:jdeploy][:java_home] = "/usr"
+# minimal java version
+# (java will be installed only if the existing version is older than specified here)
 default[:jdeploy][:min_java_version] = "1.6.0_31"
 
+# Application home dir. The app will be unpacked here
 default[:jdeploy][:app][:home_dir] = "/opt/application"
+# user and group the app to own and to run
 default[:jdeploy][:app][:user] = "root"
 default[:jdeploy][:app][:group] = "root"
+# URL to download the application
 default[:jdeploy][:app][:download_url] = "http://localhost:7777/app.tar.gz"
-# default[:jdeploy][:app][:archive_type] = "" # set to override ArchiveTypeByUrl detection
-default[:jdeploy][:app][:dirs_to_create] = [] # create additional directories for the app (i.e. logs, pids)
+# set to override ArchiveTypeByUrl detection
+# default[:jdeploy][:app][:archive_type] = ""
+# create additional directories for the app (i.e. logs, pids)
+default[:jdeploy][:app][:dirs_to_create] = []
 
 # specify URLs to hook scripts. Leave empty if unnecessary
 default[:jdeploy][:app][:pre_unpack] = ""
