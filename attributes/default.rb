@@ -32,3 +32,9 @@ default[:jdeploy][:app][:start_cmdline] = '-XX:MaxPermSize=256m -cp "$APP_HOME/*
 default[:jdeploy][:app][:stdout_log] = "/var/log/#{node[:jdeploy][:app][:app_name]}"
 # File to store PID of the application
 default[:jdeploy][:app][:pid_file] = "/var/run/#{node[:jdeploy][:app][:app_name]}"
+
+# hash of properties for config file genenration
+# the file will look like: <hash_key> = <hash_value>
+default[:jdeploy][:app][:config_properties] = {}
+# config file to generate. Leave empty not to generate
+default[:jdeploy][:app][:config_file] = ""

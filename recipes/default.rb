@@ -78,6 +78,26 @@ if ! node[:jdeploy][:app][:dirs_to_create].empty?
     end
 end
 
+# generate properties file
+if ! node[:jdeploy][:app][:config_file].empty?
+    # Convert Chef::Node::Attribute to Hash
+    # TODO: Is this really essential?
+    app_config_properties = {}
+    if node[:jdeploy][:app][:config_properties]
+        # add all properties to the hash
+        node[:jdeploy][:app][:config_properties].each do |key, value|
+            app_config_properties[key] = value
+        end
+    end
+    
+    alter_properties "#{node[:jdeploy][:app][:config_file]}" do
+        properties app_config_properties
+        escape_special false
+        skip_empty true
+        create_file true
+    end
+end
+
 run_hook "pre_start" do
     script_url node[:jdeploy][:app][:pre_start]
 end
