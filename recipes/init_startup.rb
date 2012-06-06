@@ -7,5 +7,5 @@ template "/etc/init.d/#{node[:jdeploy][:app][:app_name]}" do
 end
 
 service "#{node[:jdeploy][:app][:app_name]}" do
-  action [ :enable, :start ]
+    action [ :enable, :start ]
 end

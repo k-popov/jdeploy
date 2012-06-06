@@ -42,3 +42,11 @@ default[:jdeploy][:app][:pid_file] = "/var/run/#{node[:jdeploy][:app][:app_name]
 default[:jdeploy][:app][:config_properties] = {}
 # config file to generate. Leave empty not to generate
 default[:jdeploy][:app][:config_file] = ""
+
+# select the application startup method
+# "init" - use init script shipped with the cookbook
+# "custom" - use a custom script downloaded
+default[:jdeploy][:startup_method] = "init"
+
+# URL to download a custom application startup script
+default[:jdeploy][:custom_startup_url] = ""

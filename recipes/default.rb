@@ -117,6 +117,16 @@ end
 run_hook "pre_start" do
     script_url node[:jdeploy][:app][:pre_start]
 end
-
-# add startup script and runn the app
-include_recipe "jdeploy::init"
+case node[:jdeploy][:startup_method]
+    when "init"
+        # add startup script and runn the app
+        include_recipe "jdeploy::init_startup"
+    when "custom"
+        # final check if custom startup script may be used
+        if ! node[:jdeploy][:custom_startup_url].empty?
+            # use custom script for startup
+            include_recipe "jdeploy::custom_startup"
+        else
+            include_recipe "jdeploy::init_startup"
+        end
+end
