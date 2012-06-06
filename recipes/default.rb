@@ -64,7 +64,7 @@ if archive_type == "zip"
         group "#{node[:jdeploy][:app][:group]}"
         environment ({'PATH' => '/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin'})
     end
-elif archive_type == "tar.gz"
+elsif archive_type == "tar.gz"
     # untar the file
     execute "untar_file" do
         command "tar -xvzf #{app_tmp_dir}/#{application_archive_file}"

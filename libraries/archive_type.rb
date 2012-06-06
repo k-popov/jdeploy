@@ -6,10 +6,13 @@ class Chef
                 return ""
             end
             if url.match(/\.zip$/)
+                Chef::Log.info "Detected archive type: zip"
                 return "zip"
-            elif url.match(/\.tar\.gz$/)
+            elsif url.match(/\.tar\.gz$/)
+                Chef::Log.info "Detected archive type: tar.gz"
                 return "tar.gz"
             else
+                Chef::Log.info "Detected archive type: <empty>"
                 return ""
             end
         end
