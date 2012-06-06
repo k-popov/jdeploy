@@ -1,6 +1,6 @@
 define :run_hook, :script_url => "" do
     # if the script is defined
-    if ! params[:script_url].empty
+    if ! params[:script_url].empty?
         # prepare an empty directory for the script
         require 'tmpdir'
         script_tmp_dir = Dir.mktmpdir
