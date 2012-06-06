@@ -11,6 +11,10 @@ default[:jdeploy][:app][:home_dir] = "/opt/application"
 # user and group the app to own and to run
 default[:jdeploy][:app][:user] = "root"
 default[:jdeploy][:app][:group] = "root"
+# UID and GID may also be speecified (optional)
+# default[:jdeploy][:app][:gid] = ""
+# default[:jdeploy][:app][:uid] = ""
+
 # URL to download the application
 default[:jdeploy][:app][:download_url] = "http://localhost:7777/app.tar.gz"
 # set to override ArchiveTypeByUrl detection

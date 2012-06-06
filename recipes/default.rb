@@ -12,10 +12,26 @@ if node[:jdeploy][:redeploy] && File.exists?("#{node[:jdeploy][:app][:home_dir]}
     end
 end
 
+# create a user and group for the app to run
+if ! node[:etc][:passwd].keys.index(node[:jdeploy][:app][:user])
+    # create the user only if it doesn't exist
+    group "#{node[:jdeploy][:app][:group]}" do
+        action :create
+        gid node[:jdeploy][:app][:gid]
+    end
+
+    user "#{node[:jdeploy][:app][:user]}" do
+        action :create
+        home "#{node[:jdeploy][:app][:home_dir]}"
+        gid "#{node[:jdeploy][:app][:group]}"
+        uid node[:jdeploy][:app][:uid]
+    end
+end
+
 directory "#{node[:jdeploy][:app][:home_dir]}" do
     action :create
-    owner "#{default[:jdeploy][:app][:user]}"
-    group "#{default[:jdeploy][:app][:group]}"
+    owner "#{node[:jdeploy][:app][:user]}"
+    group "#{node[:jdeploy][:app][:group]}"
     mode "0755"
     recursive true
 end
@@ -44,8 +60,8 @@ if archive_type == "zip"
     execute "unzip_file" do
         command "unzip #{app_tmp_dir}/#{application_archive_file}"
         cwd "#{node[:jdeploy][:app][:home_dir]}"
-        user "#{default[:jdeploy][:app][:user]}"
-        group "#{default[:jdeploy][:app][:group]}"
+        user "#{node[:jdeploy][:app][:user]}"
+        group "#{node[:jdeploy][:app][:group]}"
         environment ({'PATH' => '/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin'})
     end
 elif archive_type == "tar.gz"
@@ -53,8 +69,8 @@ elif archive_type == "tar.gz"
     execute "untar_file" do
         command "tar -xvzf #{app_tmp_dir}/#{application_archive_file}"
         cwd "#{node[:jdeploy][:app][:home_dir]}"
-        user "#{default[:jdeploy][:app][:user]}"
-        group "#{default[:jdeploy][:app][:group]}"
+        user "#{node[:jdeploy][:app][:user]}"
+        group "#{node[:jdeploy][:app][:group]}"
         environment ({'PATH' => '/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin'})
     end
 else
@@ -70,8 +86,8 @@ if ! node[:jdeploy][:app][:dirs_to_create].empty?
     node[:jdeploy][:app][:dirs_to_create].each do |additional_dir|
         directory "#{additional_dir}" do
             action :create
-            owner "#{default[:jdeploy][:app][:user]}"
-            group "#{default[:jdeploy][:app][:group]}"
+            owner "#{node[:jdeploy][:app][:user]}"
+            group "#{node[:jdeploy][:app][:group]}"
             mode "0755"
             recursive true
         end
