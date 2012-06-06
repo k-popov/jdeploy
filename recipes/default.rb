@@ -119,4 +119,4 @@ run_hook "pre_start" do
 end
 
 # add startup script and runn the app
-include_recipe "jdeploy-chef::init"
+include_recipe "jdeploy::init"
