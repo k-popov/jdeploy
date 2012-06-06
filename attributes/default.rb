@@ -24,10 +24,14 @@ default[:jdeploy][:app][:archive_type] = ""
 # create additional directories for the app (i.e. logs, pids)
 default[:jdeploy][:app][:dirs_to_create] = []
 
-# specify URLs to hook scripts. Leave empty if unnecessary
+# specify URLs to hook scripts.
+# Leave empty if unnecessary but do not comment out
 default[:jdeploy][:app][:pre_unpack] = ""
 default[:jdeploy][:app][:post_unpack] = ""
 default[:jdeploy][:app][:pre_start] = ""
+default[:jdeploy][:app][:pre_stop] = ""
+default[:jdeploy][:app][:pre_delete] = ""
+default[:jdeploy][:app][:post_delete] = ""
 
 # name of the application
 default[:jdeploy][:app][:app_name] = "app"
