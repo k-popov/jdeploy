@@ -22,6 +22,7 @@ PID_FILE="<%=@node[:jdeploy][:app][:pid_file]%>"
 
 function dostart {
 	echo "Starting <%=@node[:jdeploy][:app][:app_name]%>."
+        cd "$APP_HOME"
 	nohup $JAVA_HOME/bin/java <%=@node[:jdeploy][:app][:start_cmdline]%> > $LOG_FILE 2>&1 &
         echo "$!" > $PID_FILE
 }
