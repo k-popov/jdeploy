@@ -1,5 +1,7 @@
 # Set this to true to redeploy the app (remove its directory first)
 default[:jdeploy][:redeploy] = true
+# master swith to install java or not. Set to false if you install java yourself (i.e. add java to run_list)
+default[:jdeploy][:install_java] = true
 # JAVA_HOME in for example init script
 default[:jdeploy][:java_home] = "/usr"
 # minimal java version
