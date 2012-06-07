@@ -4,4 +4,5 @@ description       "Installs a generic java webapp running standalone"
 version           "0.0.1"
 depends           "java"
 depends           "apache2"
+depends           "common-lib"
 
