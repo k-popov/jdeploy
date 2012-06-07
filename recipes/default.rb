@@ -8,10 +8,7 @@ end
 
 # cleanup the directory if re-deploy requested
 if node[:jdeploy][:redeploy] && File.exists?("#{node[:jdeploy][:app][:home_dir]}")
-    directory "#{node[:jdeploy][:app][:home_dir]}" do
-        action :delete
-        recursive true
-    end
+    include_recipe "jdeploy::remove"
 end
 
 # create a user and group for the app to run
