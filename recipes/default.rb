@@ -131,3 +131,9 @@ case node[:jdeploy][:startup_method]
             include_recipe "jdeploy::init_startup"
         end
 end
+
+if node[:jdeploy][:apache_proxy]
+    # include the recipe from site-cookbooks (configure with i.e. JSON file)
+    include_recipe "apache2::default_proxy"
+end
+

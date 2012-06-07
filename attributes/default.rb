@@ -52,3 +52,10 @@ default[:jdeploy][:startup_method] = "init"
 
 # URL to download a custom application startup script
 default[:jdeploy][:custom_startup_url] = ""
+
+# If set to true, apache will be installed
+# and set up to proxy requests to its port 80 (default)
+# to port 8080 (default) where the app
+# listens for connections
+default[:jdeploy][:apache_proxy] = false
+
