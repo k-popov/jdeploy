@@ -1,8 +1,9 @@
 # node[:jdeploy][:install_java] is a master manual switch.
-if ( node[:jdeploy][:install_java] ) || \
-   ( ! node[:languages][:java] ) || ( ! node[:languages][:java][:version] ) || \
-   v1_older_v2( node[:languages][:java][:version], node[:jdeploy][:min_java_version] )
-        include_recipe "java"
+if ( node[:jdeploy][:install_java] )
+    if ( ! node[:languages][:java] ) || ( ! node[:languages][:java][:version] ) || \
+        v1_older_v2( node[:languages][:java][:version], node[:jdeploy][:min_java_version] )
+            include_recipe "java"
+    end
 end
 
 # cleanup the directory if re-deploy requested
