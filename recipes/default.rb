@@ -41,9 +41,12 @@ end
 application_archive_file = filenameByUrl("#{node[:jdeploy][:app][:download_url]}")
 require 'tmpdir'
 app_tmp_dir = Dir.mktmpdir
+File::chmod(0777, app_tmp_dir)
 remote_file "#{app_tmp_dir}/#{application_archive_file}" do
     source "#{node[:jdeploy][:app][:download_url]}"
     mode "0644"
+    owner "#{node[:jdeploy][:app][:user]}"
+    group "#{node[:jdeploy][:app][:group]}"
     backup false
     action :create
 end
