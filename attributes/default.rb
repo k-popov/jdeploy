@@ -33,7 +33,7 @@ default[:jdeploy][:app][:pre_start] = ""
 default[:jdeploy][:app][:app_name] = "app"
 # application startup commandline
 # (i.e. "/usr/bin/java node[:jdeploy][:app][:start_cmdline] ")
-default[:jdeploy][:app][:start_cmdline] = '-XX:MaxPermSize=256m -cp "$APP_HOME/*" com.exmple.app.mainClass'
+default[:jdeploy][:app][:start_cmdline] = '-XX:MaxPermSize=256m -cp "./*" com.exmple.app.mainClass'
 # application STDOUT redirection file
 default[:jdeploy][:app][:stdout_log] = "/var/log/#{node[:jdeploy][:app][:app_name]}"
 # File to store PID of the application
@@ -48,6 +48,7 @@ default[:jdeploy][:app][:config_file] = ""
 # select the application startup method
 # "init" - use init script shipped with the cookbook
 # "custom" - use a custom script downloaded
+# "runit" - use runit to start the application
 default[:jdeploy][:startup_method] = "init"
 
 # URL to download a custom application startup script

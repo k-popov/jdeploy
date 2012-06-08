@@ -134,6 +134,9 @@ case node[:jdeploy][:startup_method]
         else
             include_recipe "jdeploy::init_startup"
         end
+    when "runit"
+        # use runit for application startup
+        include_recipe "jdeploy::runit_startup"
 end
 
 if node[:jdeploy][:apache_proxy]

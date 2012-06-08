@@ -1,0 +1,7 @@
+#!/bin/sh
+# Template for Runit application logger startup script
+
+export PATH="/sbin:/usr/sbin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin:/bin:/root/bin"
+
+exec chpst -u <%=@node[:jdeploy][:app][:user]%>:<%=@node[:jdeploy][:app][:group]%> -U <%=@node[:jdeploy][:app][:user]%>:<%=@node[:jdeploy][:app][:group]%> svlogd -tt ./main
+
