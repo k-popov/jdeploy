@@ -11,5 +11,5 @@ export PID_FILE="<%=@node[:jdeploy][:app][:pid_file]%>"
 
 cd <%=@node[:jdeploy][:app][:home_dir]%> || exit 1
 exec 2>&1
-exec chpst -u <%=@node[:jdeploy][:app][:user]%>:<%=@node[:jdeploy][:app][:group]%> -U <%=@node[:jdeploy][:app][:user]%>:<%=@node[:jdeploy][:app][:group]%> java <%=[:jdeploy][:app][:start_cmdline]%>
+exec chpst -u <%=@node[:jdeploy][:app][:user]%>:<%=@node[:jdeploy][:app][:group]%> -U <%=@node[:jdeploy][:app][:user]%>:<%=@node[:jdeploy][:app][:group]%> java <%=@node[:jdeploy][:app][:start_cmdline]%>
 
