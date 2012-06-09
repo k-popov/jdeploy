@@ -1,7 +1,7 @@
 if node[:jdeploy][:app][:user] != "root" # do not sudo if running as root
     node["sudo_users"] = node["sudo_users"].merge( {node[:jdeploy][:app][:user] => "true"} )
-    include_recipe "sudo::default"
-end.
+    include_recipe "sudo"
+end
 
 template "/etc/init.d/#{node[:jdeploy][:app][:app_name]}" do
     source "app_init.erb"
