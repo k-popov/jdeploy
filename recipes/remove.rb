@@ -23,7 +23,7 @@ if node[:jdeploy][:startup_method] == "runit"
 
     directory "#{node[:runit][:sv_dir]}/#{node[:jdeploy][:app][:app_name]}" do
         action :delete
-        recurrsive true
+        recursive true
     end
 end
 
