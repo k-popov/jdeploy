@@ -6,4 +6,5 @@ depends           "java"
 depends           "apache2"
 depends           "common-lib"
 depends           "runit"
+depends           "sudo"
 

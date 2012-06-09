@@ -23,7 +23,11 @@ PID_FILE="<%=@node[:jdeploy][:app][:pid_file]%>"
 function dostart {
 	echo "Starting <%=@node[:jdeploy][:app][:app_name]%>."
         cd "$APP_HOME"
+<% if node[:jdeploy][:app][:user] != "root" %>
+	nohup sudo -u <%=@node[:jdeploy][:app][:user]%> -- $JAVA_HOME/bin/java <%=@node[:jdeploy][:app][:start_cmdline]%> > $LOG_FILE 2>&1 &
+<% else %>
 	nohup $JAVA_HOME/bin/java <%=@node[:jdeploy][:app][:start_cmdline]%> > $LOG_FILE 2>&1 &
+<% end %>
         echo "$!" > $PID_FILE
 }
 
