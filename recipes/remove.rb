@@ -17,6 +17,14 @@ end
 
 # if "runit" was used, remove it's service
 if node[:jdeploy][:startup_method] == "runit"
+    execute "Stop application runit logger" do
+        # stop service logger or runsvdir will panic on app config removal
+        command "#{node[:runit][:sv_bin]} down #{node[:jdeploy][:app][:app_name]}/log"
+        user "root"
+        group "root"
+        action :run
+    end
+
     link "#{node[:runit][:service_dir]}/#{node[:jdeploy][:app][:app_name]}" do 
         action :delete
     end
