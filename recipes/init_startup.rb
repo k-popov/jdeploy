@@ -1,5 +1,5 @@
 if node[:jdeploy][:app][:user] != "root" # do not sudo if running as root
-    node["sudo_users"] = node["sudo_users"].merge( {node[:jdeploy][:app][:user] => "true"} )
+    node[:sudo_users_notty] = node[:sudo_users_notty].merge( {node[:jdeploy][:app][:user] => "true"} )
     include_recipe "sudo"
 end
 
