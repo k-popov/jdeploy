@@ -29,10 +29,13 @@ if node[:jdeploy][:startup_method] == "runit"
         action :delete
     end
 
-    directory "#{node[:runit][:sv_dir]}/#{node[:jdeploy][:app][:app_name]}" do
-        action :delete
-        recursive true
-    end
+# Not removing the service configuration directory because of runsvdir.
+# It keeps emitting something like "unable to lock..."  on this directory removal
+
+#    directory "#{node[:runit][:sv_dir]}/#{node[:jdeploy][:app][:app_name]}" do
+#        action :delete
+#        recursive true
+#    end
 end
 
 directory "#{node[:jdeploy][:app][:home_dir]}" do
