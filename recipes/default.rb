@@ -99,13 +99,8 @@ end
 # generate properties file
 if ! node[:jdeploy][:app][:config_file].empty?
     # Convert Chef::Node::Attribute to Hash
-    # TODO: Is this really essential?
-    app_config_properties = {}
     if node[:jdeploy][:app][:config_properties]
-        # add all properties to the hash
-        node[:jdeploy][:app][:config_properties].each do |key, value|
-            app_config_properties[key] = value
-        end
+        app_config_properties = node[:jdeploy][:app][:config_properties].to_hash
     end
     
     alter_properties "#{node[:jdeploy][:app][:config_file]}" do
